@@ -16,14 +16,15 @@ public class RecordDbHelper extends SQLiteOpenHelper {
     public RecordDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         final String SQL_CREATE_RECORD = "CREATE TABLE " +
                 RecordContract.RecordEntry.TABLE_NAME + "(" +
-                RecordContract.RecordEntry._ID + "INTEGER PRIMARY KEY AUTOINCREMENT" +
-                RecordContract.RecordEntry.COLUMN_SUMMARY + "TEXT NOT NULL" +
-                RecordContract.RecordEntry.COLUMN_DESCRIPTION + "TEXT NOT NULL" +
-                RecordContract.RecordEntry.COLUMN_WEEK + "TEXT NOT NULL" + ");";
+                RecordContract.RecordEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                RecordContract.RecordEntry.COLUMN_SUMMARY + " TEXT NOT NULL, " +
+                RecordContract.RecordEntry.COLUMN_DESCRIPTION + " TEXT NOT NULL, " +
+                RecordContract.RecordEntry.COLUMN_WEEK + " TEXT NOT NULL" + ");";
         db.execSQL(SQL_CREATE_RECORD);
     }
 

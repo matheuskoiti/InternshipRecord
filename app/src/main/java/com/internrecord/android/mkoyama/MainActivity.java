@@ -1,5 +1,7 @@
 package com.internrecord.android.mkoyama;
 
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -8,14 +10,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.internrecord.android.mkoyama.db.RecordDbHelper;
+
 public class MainActivity extends AppCompatActivity {
+
+    private SQLiteDatabase mdb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         ListView lv_records = (ListView) findViewById(R.id.lv_records);
+
+        RecordDbHelper dbHelper = new RecordDbHelper(this);
+        mdb = dbHelper.getWritableDatabase();
+
         setSupportActionBar(toolbar);
     }
 
@@ -38,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickFloatingButton(View view) {
-
+        Intent addRecordActivity = new Intent(this, AddRecord.class);
+        startActivity(addRecordActivity);
     }
 }
