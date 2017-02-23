@@ -1,4 +1,4 @@
-package com.internrecord.android.mkoyama;
+package com.internrecord.android.mkoyama.db;
 
 import android.provider.BaseColumns;
 
@@ -12,6 +12,6 @@ public class RecordContract {
         public static final String TABLE_NAME = "record";
         public static final String COLUMN_SUMMARY = "summary";
         public static final String COLUMN_DESCRIPTION = "description";
-        public static final String COLUMN_week = "week";
+        public static final String COLUMN_WEEK = "week";
     }
 }
