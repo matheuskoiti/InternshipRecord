@@ -29,8 +29,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        // Loading and printing all records
         ListView lv_records = (ListView) findViewById(R.id.lv_records);
-        List recordList = loadRecordsData();
+        List<Record> recordList = loadRecordsData();
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, recordList);
         lv_records.setAdapter(adapter);
 
@@ -54,12 +55,14 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    // Click event for floating button
     public void onClickFloatingButton(View view) {
         Intent addRecordActivity = new Intent(this, AddRecord.class);
         startActivity(addRecordActivity);
     }
 
-    private List loadRecordsData() {
+    // Load all records from db and return a list of this records
+    private List<Record> loadRecordsData() {
         RecordDbHelper dbHelper = new RecordDbHelper(this);
         mdb = dbHelper.getReadableDatabase();
 
@@ -73,13 +76,19 @@ public class MainActivity extends AppCompatActivity {
                 null                                    // The sort order
         );
 
-        List itemSummaries = new ArrayList<>();
+        List<Record> recordList = new ArrayList<Record>();
         while(cursor.moveToNext()) {
             String summ = cursor.getString(cursor.getColumnIndex(RecordContract.RecordEntry.COLUMN_SUMMARY));
-            itemSummaries.add(summ);
+            String desc = cursor.getString(cursor.getColumnIndex(RecordContract.RecordEntry.COLUMN_DESCRIPTION));
+            String week = cursor.getString(cursor.getColumnIndex(RecordContract.RecordEntry.COLUMN_WEEK));
+            long id = cursor.getLong(cursor.getColumnIndex(RecordContract.RecordEntry._ID));
+
+            Record record = new Record(id, summ, desc, week);
+
+            recordList.add(record);
         }
         cursor.close();
 
-        return itemSummaries;
+        return recordList;
     }
 }
