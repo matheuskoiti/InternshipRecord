@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -23,6 +24,10 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private SQLiteDatabase mdb;
+    private ListView lv_records;
+    private ArrayAdapter adapter;
+    private List<Record> recordList;
+    static final int CODE_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,21 +35,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-        // Loading and printing all records
-        ListView lv_records = (ListView) findViewById(R.id.lv_records);
-        final List<Record> recordList = loadRecordsData();
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, recordList);
-        lv_records.setAdapter(adapter);
+        lv_records = (ListView) findViewById(R.id.lv_records);
+        loadAndPrintAllRecords();
 
         // Making a record`s view page load when an item is clicked
         lv_records.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Integer recordId = (int) (long) id;
-
                 Intent viewRecordActivity = new Intent(getApplicationContext(), ViewRecordActivity.class);
                 viewRecordActivity.putExtra("recordObject", recordList.get(recordId));
-                startActivity(viewRecordActivity);
+                startActivityForResult(viewRecordActivity, CODE_REQUEST);
             }
         });
 
@@ -52,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        loadAndPrintAllRecords();
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     // Click event for floating button
     public void onClickFloatingButton(View view) {
         Intent addRecordActivity = new Intent(this, AddRecordActivity.class);
-        startActivity(addRecordActivity);
+        startActivityForResult(addRecordActivity, CODE_REQUEST);
     }
 
     // Load all records from db and return a list of this records
@@ -103,6 +104,12 @@ public class MainActivity extends AppCompatActivity {
         cursor.close();
 
         return recordList;
+    }
+
+    private void loadAndPrintAllRecords() {
+        recordList = loadRecordsData();
+        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, recordList);
+        lv_records.setAdapter(adapter);
     }
 
 }

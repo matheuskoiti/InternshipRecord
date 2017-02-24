@@ -40,6 +40,7 @@ public class ViewRecordActivity extends AppCompatActivity {
     public void onClickBtnDelete(View view) {
         if (removeRecord()) {
             Toast.makeText(getApplicationContext(), "Registro removido com sucesso", Toast.LENGTH_SHORT).show();
+            finish();
         } else {
             Toast.makeText(getApplicationContext(), "Não foi possível remover o registro", Toast.LENGTH_SHORT).show();
         }

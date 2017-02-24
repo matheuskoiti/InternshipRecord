@@ -31,17 +31,27 @@ public class AddRecordActivity extends AppCompatActivity {
         mdb = dbHelper.getWritableDatabase();
     }
 
-    public void addButtonOnClick(View view) {
+    public void onClickAddButton(View view) {
         String summary = et_summary.getText().toString();
         String description = et_description.getText().toString();
         String week = et_week.getText().toString();
 
+        if (addRecord(summary, description, week)) {
+            Toast.makeText(getApplicationContext(), "Registro adicionado com sucesso", Toast.LENGTH_SHORT).show();
+            finish();
+        } else {
+            Toast.makeText(getApplicationContext(), "Não foi possível adicionar o registro", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean addRecord(String summary, String description, String week) {
         ContentValues values = new ContentValues();
         values.put(RecordContract.RecordEntry.COLUMN_SUMMARY, summary);
         values.put(RecordContract.RecordEntry.COLUMN_DESCRIPTION, description);
         values.put(RecordContract.RecordEntry.COLUMN_WEEK, week);
 
         long newRowId = mdb.insert(RecordContract.RecordEntry.TABLE_NAME, null, values);
-        Toast.makeText(getApplicationContext(), newRowId+"", Toast.LENGTH_SHORT).show();
+
+        return newRowId > 0;
     }
 }
