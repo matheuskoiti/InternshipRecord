@@ -11,7 +11,7 @@ import android.widget.Toast;
 import com.internrecord.android.mkoyama.db.RecordContract;
 import com.internrecord.android.mkoyama.db.RecordDbHelper;
 
-public class AddRecord extends AppCompatActivity {
+public class AddRecordActivity extends AppCompatActivity {
 
     private SQLiteDatabase mdb;
     private EditText et_summary;

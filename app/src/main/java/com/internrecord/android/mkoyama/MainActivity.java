@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -31,9 +32,21 @@ public class MainActivity extends AppCompatActivity {
 
         // Loading and printing all records
         ListView lv_records = (ListView) findViewById(R.id.lv_records);
-        List<Record> recordList = loadRecordsData();
+        final List<Record> recordList = loadRecordsData();
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, recordList);
         lv_records.setAdapter(adapter);
+
+        // Making a record`s view page load when an item is clicked
+        lv_records.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Integer recordId = (int) (long) id;
+
+                Intent viewRecordActivity = new Intent(getApplicationContext(), ViewRecordActivity.class);
+                viewRecordActivity.putExtra("recordObject", recordList.get(recordId));
+                startActivity(viewRecordActivity);
+            }
+        });
 
         setSupportActionBar(toolbar);
     }
@@ -57,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Click event for floating button
     public void onClickFloatingButton(View view) {
-        Intent addRecordActivity = new Intent(this, AddRecord.class);
+        Intent addRecordActivity = new Intent(this, AddRecordActivity.class);
         startActivity(addRecordActivity);
     }
 
@@ -91,4 +104,5 @@ public class MainActivity extends AppCompatActivity {
 
         return recordList;
     }
+
 }

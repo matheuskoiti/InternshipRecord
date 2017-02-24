@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.internrecord.android.mkoyama.db.RecordContract;
 import com.internrecord.android.mkoyama.db.RecordDbHelper;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  * Created by mkoyama on 23/02/17.
  */
 
-public class Record {
+public class Record implements Serializable {
     protected long id;
     protected String summary;
     protected String description;
