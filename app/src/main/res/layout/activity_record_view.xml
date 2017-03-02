@@ -7,7 +7,7 @@
     tools:context="com.internrecord.android.mkoyama.ViewRecordActivity">
     <LinearLayout
         android:paddingTop="25dp"
-        android:paddingLeft="9dp"
+        android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,7 +55,6 @@
             android:id="@+id/btn_delete"
             android:text="@string/delete"
             android:onClick="onClickBtnDelete"
-            android:gravity="center"
             android:layout_width="260dp"
             android:layout_height="wrap_content"
             style="@style/Widget.AppCompat.Button.Small" />
