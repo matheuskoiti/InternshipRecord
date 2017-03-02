@@ -1,5 +1,6 @@
 package com.internrecord.android.mkoyama;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,8 @@ import android.widget.Toast;
 
 import com.internrecord.android.mkoyama.db.RecordContract;
 import com.internrecord.android.mkoyama.db.RecordDbHelper;
+
+import static java.security.AccessController.getContext;
 
 public class ViewRecordActivity extends AppCompatActivity {
 
@@ -36,7 +39,7 @@ public class ViewRecordActivity extends AppCompatActivity {
         tv_week_view.setText(recordItem.getWeek());
     }
 
-    // Remove a Record from database
+    // onClick event for delete button
     public void onClickBtnDelete(View view) {
         if (removeRecord()) {
             Toast.makeText(getApplicationContext(), "Registro removido com sucesso", Toast.LENGTH_SHORT).show();
@@ -46,10 +49,12 @@ public class ViewRecordActivity extends AppCompatActivity {
         }
     }
 
+    // Remove a Record from database
     private boolean removeRecord() {
         RecordDbHelper dbHelper = new RecordDbHelper(this);
         mdb = dbHelper.getReadableDatabase();
         long id = recordItem.getId();
         return mdb.delete(RecordContract.RecordEntry.TABLE_NAME, RecordContract.RecordEntry._ID + "=" + id, null) > 0;
     }
+
 }

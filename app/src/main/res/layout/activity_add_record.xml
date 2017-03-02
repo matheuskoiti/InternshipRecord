@@ -72,9 +72,12 @@
 
         <Button
             android:text="@string/send"
+            android:id="@+id/btn_insert"
             android:layout_width="260dp"
             android:layout_height="wrap_content"
-            android:onClick="onClickAddButton"/>
+            android:onClick="onClickAddButton"
+            android:textColor="@android:color/white"
+            android:background="@drawable/button_custom"/>
 
     </LinearLayout>
 

@@ -57,7 +57,8 @@
             android:onClick="onClickBtnDelete"
             android:layout_width="260dp"
             android:layout_height="wrap_content"
-            style="@style/Widget.AppCompat.Button.Small" />
+            android:textColor="@android:color/white"
+            android:background="@drawable/button_custom" />
     </LinearLayout>
 
 </LinearLayout>

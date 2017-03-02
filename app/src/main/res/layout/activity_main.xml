@@ -31,6 +31,7 @@
         android:layout_margin="@dimen/fab_margin"
         android:onClick="onClickFloatingButton"
         app:srcCompat="@android:drawable/ic_input_add"
-        android:tint="@android:color/white"/>
+        android:tint="@android:color/white"
+        app:backgroundTint="@android:color/holo_green_light"/>
 
 </android.support.design.widget.CoordinatorLayout>
