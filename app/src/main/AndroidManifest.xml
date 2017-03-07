@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddRecordActivity" />
-        <activity android:name=".ViewRecordActivity"></activity>
+        <activity android:name=".ViewRecordActivity" />
+        <activity android:name=".UpdateRecordActivity"></activity>
     </application>
 
 </manifest>

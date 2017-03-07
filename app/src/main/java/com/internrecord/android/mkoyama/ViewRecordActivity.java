@@ -57,4 +57,11 @@ public class ViewRecordActivity extends AppCompatActivity {
         return mdb.delete(RecordContract.RecordEntry.TABLE_NAME, RecordContract.RecordEntry._ID + "=" + id, null) > 0;
     }
 
+    // onClick event for upgrade button
+    public void onClickBtnUpdate(View view) {
+        Toast.makeText(getApplicationContext(), "Em desenvolvimento", Toast.LENGTH_SHORT).show();
+        Intent updateRecordActivity = new Intent(this, UpdateRecordActivity.class);
+        startActivity(updateRecordActivity);
+    }
+
 }

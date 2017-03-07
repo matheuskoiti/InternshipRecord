@@ -7,4 +7,5 @@
     <string name="send">Inserir</string>
     <string name="delete">Remover</string>
     <string name="update">Atualizar</string>
+    <string name="title_activity_update_record">UpdateRecordActivity</string>
 </resources>

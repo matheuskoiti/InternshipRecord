@@ -56,4 +56,18 @@
             android:textColor="@android:color/white"
             android:background="@drawable/button_custom" />
     </LinearLayout>
+    <LinearLayout
+        android:paddingTop="10dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:text="@string/update"
+            android:onClick="onClickBtnUpdate"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:background="@drawable/button_custom" />
+    </LinearLayout>
 </LinearLayout>
