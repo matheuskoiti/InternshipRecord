@@ -17,7 +17,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-
     <LinearLayout
         android:paddingTop="25dp"
         android:paddingLeft="15dp"
@@ -30,7 +29,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-
     <LinearLayout
         android:paddingTop="25dp"
         android:paddingLeft="15dp"
@@ -43,14 +41,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-
     <LinearLayout
         android:paddingTop="40dp"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
         <Button
             android:id="@+id/btn_delete"
             android:text="@string/delete"
@@ -60,5 +56,4 @@
             android:textColor="@android:color/white"
             android:background="@drawable/button_custom" />
     </LinearLayout>
-
 </LinearLayout>
