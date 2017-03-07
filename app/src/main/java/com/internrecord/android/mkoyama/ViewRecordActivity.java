@@ -21,6 +21,7 @@ public class ViewRecordActivity extends AppCompatActivity {
     private TextView tv_desc_view;
     private TextView tv_week_view;
     private SQLiteDatabase mdb;
+    private final int CODE_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +35,7 @@ public class ViewRecordActivity extends AppCompatActivity {
         tv_desc_view = (TextView) findViewById(R.id.tv_desc_view);
         tv_week_view = (TextView) findViewById(R.id.tv_week_view);
 
-        tv_summay_view.setText(recordItem.getSummary());
-        tv_desc_view.setText(recordItem.getDescription());
-        tv_week_view.setText(recordItem.getWeek());
+        loadRecordView(recordItem);
     }
 
     // onClick event for delete button
@@ -59,9 +58,24 @@ public class ViewRecordActivity extends AppCompatActivity {
 
     // onClick event for upgrade button
     public void onClickBtnUpdate(View view) {
-        Toast.makeText(getApplicationContext(), "Em desenvolvimento", Toast.LENGTH_SHORT).show();
         Intent updateRecordActivity = new Intent(this, UpdateRecordActivity.class);
-        startActivity(updateRecordActivity);
+        updateRecordActivity.putExtra("recordObject", recordItem);
+        startActivityForResult(updateRecordActivity, CODE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == UpdateRecordActivity.RESULT_OK) {
+            Record updatedRecord = (Record)data.getSerializableExtra("updatedRecord");
+            loadRecordView(updatedRecord);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void loadRecordView(Record record) {
+        tv_summay_view.setText(record.getSummary());
+        tv_desc_view.setText(record.getDescription());
+        tv_week_view.setText(record.getWeek());
     }
 
 }
