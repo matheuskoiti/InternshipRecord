@@ -6,6 +6,6 @@
     <string name="week">Período</string>
     <string name="send">Inserir</string>
     <string name="delete">Remover</string>
-    <string name="update">Atualizar</string>
+    <string name="update">Editar</string>
     <string name="title_activity_update_record">UpdateRecordActivity</string>
 </resources>

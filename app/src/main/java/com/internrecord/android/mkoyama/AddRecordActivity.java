@@ -51,7 +51,7 @@ public class AddRecordActivity extends AppCompatActivity {
     }
 
     /**
-     * Puts all record attributes (parameters) inside a content value and add a new record to databse
+     * Puts all record attributes (parameters) inside a content value and add a new record to database
      *
      * @param summary
      * @param description

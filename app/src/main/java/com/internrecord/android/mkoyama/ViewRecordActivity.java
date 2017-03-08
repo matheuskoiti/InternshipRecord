@@ -1,8 +1,10 @@
 package com.internrecord.android.mkoyama;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -39,29 +41,13 @@ public class ViewRecordActivity extends AppCompatActivity {
     }
 
     /**
-     * Delete button on click event
+     * Delete button on click event. It shows a dialog box asking for user's confirmation
      *
      * @param view
      */
     public void onClickBtnDelete(View view) {
-        if (removeRecord()) {
-            Toast.makeText(getApplicationContext(), "Registro removido com sucesso", Toast.LENGTH_SHORT).show();
-            finish();
-        } else {
-            Toast.makeText(getApplicationContext(), "Não foi possível remover o registro", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    /**
-     * Remove a Record from database
-     *
-     * @return true if the deletion was succeeded
-     */
-    private boolean removeRecord() {
-        RecordDbHelper dbHelper = new RecordDbHelper(this);
-        mdb = dbHelper.getReadableDatabase();
-        long id = recordItem.getId();
-        return mdb.delete(RecordContract.RecordEntry.TABLE_NAME, RecordContract.RecordEntry._ID + "=" + id, null) > 0;
+        AlertDialog confirmBox = AskOption();
+        confirmBox.show();
     }
 
     /**
@@ -93,5 +79,52 @@ public class ViewRecordActivity extends AppCompatActivity {
         tv_summay_view.setText(record.getSummary());
         tv_desc_view.setText(record.getDescription());
         tv_week_view.setText(record.getWeek());
+    }
+
+    /**
+     * Shows a dialog box asking for users confirmation. In positive case it removes a record.
+     * In negative case the operation is not completed.
+     *
+     * @return the dialog box
+     */
+    private AlertDialog AskOption() {
+        AlertDialog removeConfDialogBox = new AlertDialog.Builder(this)
+                //set message, title
+                .setTitle("Remover")
+                .setMessage("Deseja mesmo remover o registro?")
+
+                .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        if (removeRecord()) {
+                            Toast.makeText(getApplicationContext(), "Registro removido com sucesso", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Não foi possível remover o registro", Toast.LENGTH_SHORT).show();
+                        }
+                        dialog.dismiss();
+                    }
+                })
+
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        Toast.makeText(getApplicationContext(), "Operação cancelada", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .create();
+        return removeConfDialogBox;
+    }
+
+
+    /**
+     * Remove a Record from database
+     *
+     * @return true if the deletion was succeeded
+     */
+    private boolean removeRecord() {
+        RecordDbHelper dbHelper = new RecordDbHelper(this);
+        mdb = dbHelper.getReadableDatabase();
+        long id = recordItem.getId();
+        return mdb.delete(RecordContract.RecordEntry.TABLE_NAME, RecordContract.RecordEntry._ID + "=" + id, null) > 0;
     }
 }

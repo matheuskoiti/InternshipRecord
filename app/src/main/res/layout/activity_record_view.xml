@@ -48,9 +48,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/btn_delete"
-            android:text="@string/delete"
-            android:onClick="onClickBtnDelete"
+            android:text="@string/update"
+            android:onClick="onClickBtnUpdate"
             android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
@@ -63,11 +62,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <Button
-            android:text="@string/update"
-            android:onClick="onClickBtnUpdate"
+            android:id="@+id/btn_delete"
+            android:text="@string/delete"
+            android:onClick="onClickBtnDelete"
             android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:background="@drawable/button_custom" />
+            android:background="@drawable/remove_button_custom" />
     </LinearLayout>
 </LinearLayout>
