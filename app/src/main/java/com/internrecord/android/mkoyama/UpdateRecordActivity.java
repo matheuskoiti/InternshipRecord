@@ -34,6 +34,11 @@ public class UpdateRecordActivity extends AppCompatActivity {
         loadRecordData();
     }
 
+    /**
+     * Update/Edit button click event
+     *
+     * @param view
+     */
     public void onClickUpdateButton(View view) {
         if (updateRecord()) {
             Toast.makeText(getApplicationContext(), "Registro atualizado com sucesso", Toast.LENGTH_SHORT).show();
@@ -48,6 +53,11 @@ public class UpdateRecordActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Puts all record attributes (from form) inside a content value and update a record from database
+     *
+     * @return true if the update was succeed
+     */
     private boolean updateRecord() {
         RecordDbHelper dbHelper = new RecordDbHelper(this);
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -69,14 +79,18 @@ public class UpdateRecordActivity extends AppCompatActivity {
         return count > 0;
     }
 
-    // Set the new values into the record object
+    /**
+     * Set the new values (from form) into the record object
+     */
     private void getValuesFromForm() {
         recordItem.setSummary(et_summary_edit.getText().toString());
         recordItem.setDescription(et_desc_edit.getText().toString());
         recordItem.setWeek(et_week_edit.getText().toString());
     }
 
-    // Setting the edit text values
+    /**
+     * Making the edit texts show the object values
+     */
     private void loadRecordData() {
         et_summary_edit.setText(recordItem.getSummary());
         et_desc_edit.setText(recordItem.getDescription());

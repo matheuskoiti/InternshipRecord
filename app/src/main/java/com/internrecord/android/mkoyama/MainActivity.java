@@ -69,13 +69,23 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    // Click event for floating button
+
+    /**
+     * Click event for floating button
+     *
+     * @param view
+     */
     public void onClickFloatingButton(View view) {
         Intent addRecordActivity = new Intent(this, AddRecordActivity.class);
         startActivityForResult(addRecordActivity, CODE_REQUEST);
     }
 
-    // Load all records from db and return a list of this records
+
+    /**
+     * Load all records from db and return them
+     *
+     * @return a list of all record from database
+     */
     private List<Record> loadRecordsData() {
         RecordDbHelper dbHelper = new RecordDbHelper(this);
         mdb = dbHelper.getReadableDatabase();
@@ -106,6 +116,10 @@ public class MainActivity extends AppCompatActivity {
         return recordList;
     }
 
+    /**
+     * Update the record's list. this method is called when creating the page and when an insert
+     * operation is finished
+     */
     private void loadAndPrintAllRecords() {
         recordList = loadRecordsData();
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, recordList);

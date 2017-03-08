@@ -32,6 +32,11 @@ public class AddRecordActivity extends AppCompatActivity {
         mdb = dbHelper.getWritableDatabase();
     }
 
+    /**
+     * Add button click event
+     *
+     * @param view
+     */
     public void onClickAddButton(View view) {
         String summary = et_summary.getText().toString();
         String description = et_description.getText().toString();
@@ -45,6 +50,14 @@ public class AddRecordActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Puts all record attributes (parameters) inside a content value and add a new record to databse
+     *
+     * @param summary
+     * @param description
+     * @param week
+     * @return true if the insertion was succeed
+     */
     private boolean addRecord(String summary, String description, String week) {
         ContentValues values = new ContentValues();
         values.put(RecordContract.RecordEntry.COLUMN_SUMMARY, summary);

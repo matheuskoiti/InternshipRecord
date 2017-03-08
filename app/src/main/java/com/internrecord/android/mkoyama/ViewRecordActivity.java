@@ -38,7 +38,11 @@ public class ViewRecordActivity extends AppCompatActivity {
         loadRecordView(recordItem);
     }
 
-    // onClick event for delete button
+    /**
+     * Delete button on click event
+     *
+     * @param view
+     */
     public void onClickBtnDelete(View view) {
         if (removeRecord()) {
             Toast.makeText(getApplicationContext(), "Registro removido com sucesso", Toast.LENGTH_SHORT).show();
@@ -48,7 +52,11 @@ public class ViewRecordActivity extends AppCompatActivity {
         }
     }
 
-    // Remove a Record from database
+    /**
+     * Remove a Record from database
+     *
+     * @return true if the deletion was succeeded
+     */
     private boolean removeRecord() {
         RecordDbHelper dbHelper = new RecordDbHelper(this);
         mdb = dbHelper.getReadableDatabase();
@@ -56,7 +64,11 @@ public class ViewRecordActivity extends AppCompatActivity {
         return mdb.delete(RecordContract.RecordEntry.TABLE_NAME, RecordContract.RecordEntry._ID + "=" + id, null) > 0;
     }
 
-    // onClick event for upgrade button
+    /**
+     * onClick event for upgrade button
+     *
+     * @param view
+     */
     public void onClickBtnUpdate(View view) {
         Intent updateRecordActivity = new Intent(this, UpdateRecordActivity.class);
         updateRecordActivity.putExtra("recordObject", recordItem);
@@ -72,10 +84,14 @@ public class ViewRecordActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    /**
+     * Making the edit texts show the values from the record received as parameter
+     *
+     * @param record
+     */
     private void loadRecordView(Record record) {
         tv_summay_view.setText(record.getSummary());
         tv_desc_view.setText(record.getDescription());
         tv_week_view.setText(record.getWeek());
     }
-
 }
